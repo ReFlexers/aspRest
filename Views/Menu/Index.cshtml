@@ -1,0 +1,27 @@
+﻿@model List<asp.net_1.Models.MenuItem>
+
+@{
+    ViewData["Title"] = "Меню";
+}
+
+<h2>Меню</h2>
+
+@if (Model != null && Model.Any())
+{
+    <div class="menu-table">
+        @foreach (var item in Model)
+        {
+            <div class="menu-item">
+                <img src="@Url.Content(item.ImageUrl)" alt="@item.Name" style="max-width: 200px;" />
+                <h3>@item.Name</h3>
+                <p>@item.Description</p>
+                <strong><p>Цена: @item.Price</p></strong>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>Нет доступных элементов меню на данный момент.</p>
+}
+

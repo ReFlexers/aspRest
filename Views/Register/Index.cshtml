@@ -1,0 +1,19 @@
+﻿@model asp.net_1.ViewModels.UserViewModel
+
+<div class="form-container">
+    <h2>Регистрация</h2>
+
+    <form action="/Register/Register" method="post">
+      
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="Username" class="form-control" minlength="3" maxlength="15" required />
+            @Html.ValidationMessage("Username")
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="Password" class="form-control" minlength="8" maxlength="20" required />
+        </div>
+        <button type="submit" class="btn">Зарегистрироваться</button>
+    </form>
+</div>

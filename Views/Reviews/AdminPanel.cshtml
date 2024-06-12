@@ -1,0 +1,41 @@
+﻿@model List<asp.net_1.Models.Review>
+
+@{
+    ViewData["Title"] = "Админ панель - Отзывы";
+}
+
+<h2>Админ панель - Отзывы</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Пользователь</th>
+                <th>Комментарий</th>
+                <th>Дата</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var review in Model)
+            {
+                <tr>
+                    <td>@review.UserName</td>
+                    <td>@review.Comment</td>
+                    <td>@review.Date.ToString("g")</td>
+                    <td>
+                        <form asp-action="DeleteReview" action="/Reviews/DeleteReview" method="post">
+                            <input type="hidden" name="id"  value="@review.Id" />
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Нет доступных отзывов на данный момент.</p>
+}

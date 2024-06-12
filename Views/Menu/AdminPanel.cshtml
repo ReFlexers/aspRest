@@ -1,0 +1,67 @@
+﻿@model List<asp.net_1.Models.MenuItem>
+
+@{
+    ViewData["Title"] = "Меню - Админ панель";
+}
+
+<h2>Меню - Админ панель</h2>
+<div class="containerAD">
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped menu-table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Цена</th>
+                <th>Изображение</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var menuItem in Model)
+            {
+                <tr>
+                    <td>@menuItem.Name</td>
+                    <td>@menuItem.Description</td>
+                    <td>@menuItem.Price</td>
+                    <td><img src="@Url.Content(menuItem.ImageUrl)" alt="@menuItem.Name" style="max-width: 200px;" /></td>
+                    <td>
+                        <form asp-action="DeleteMenuItem" action="/Menu/DeleteMenuItem" method="post">
+                            <input type="hidden" name="id" value="@menuItem.Id" />
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Нет доступных элементов меню на данный момент.</p>
+}
+
+<div id="addMenuItemForm" class="menu-item-form">
+    <h3>Добавить новый элемент меню</h3>
+    <form id="addMenuItemForm" action="/Menu/AddMenuItem" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Название:</label>
+                <input type="text" class="form-control" maxlength="50"  id="name" name="name" required />
+        </div>
+        <div class="form-group">
+            <label for="description">Описание:</label>
+                <textarea class="form-control" maxlength="50" id="description" name="description" maxlength="50" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="price">Цена:</label>
+                <input type="number" class="form-control" maxlength="10000" step="0.01" id="price" name="price" required />
+        </div>
+        <div class="form-group">
+            <label for="image">Изображение:</label>
+            <input type="file" class="form-control-file"  id="image" name="image" />
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+</div>
+</div>

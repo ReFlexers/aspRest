@@ -1,0 +1,58 @@
+﻿@model List<asp.net_1.ViewModels.ActionViewModel>
+
+@{
+    ViewData["Title"] = "Акции Ресторана";
+}
+
+<style>
+    .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+
+    .action {
+        width: 300px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .action img {
+        max-width: 100%;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .action h3 {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    .action p {
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 10px;
+    }
+</style>
+
+<h2>Акции Ресторана</h2>
+
+@if (Model.Any())
+{
+    <div class="actions">
+        @foreach (var action in Model)
+        {
+            <div class="action">
+                <img src="@Url.Content(action.ImageUrl)" alt="@action.Title" />
+                <h3>@action.Title</h3>
+                <p>@action.Description</p>
+                <p>@action.Details</p>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>Нет акций доступных на данный момент.</p>
+}

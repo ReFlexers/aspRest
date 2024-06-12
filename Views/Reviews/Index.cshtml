@@ -1,0 +1,40 @@
+﻿@model List<asp.net_1.Models.Review>
+<style>
+
+</style>
+<h2>Отзывы</h2>
+
+@if (Model.Any())
+{
+    foreach (var review in Model)
+    {
+        <div class="review">
+            <p><strong>@review.UserName</strong> - @review.Date.ToShortDateString()</p>
+            <p>@review.Comment</p>
+        </div>
+    }
+}
+else
+{
+    <p>Пока здесь нет отзывов.</p>
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+
+    <div id="reviewForm">
+        <h3>Оставить отзыв</h3>
+        <form id="reviewForm" action="/Reviews/AddReview" method="post" onsubmit="return validateForm()">
+            <div>
+                <label for="comment">Отзыв:</label>
+                <textarea id="comment" name="comment" required maxlength="50" oninput="updateCharacterCount()"></textarea>
+              
+            </div>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+}
+else
+{
+    <p>Чтобы оставить отзыв, <a href="/Login">войдите</a> или <a href="/Register">зарегистрируйтесь</a>.</p>
+}
